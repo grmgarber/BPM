@@ -1,0 +1,23 @@
+<h3>All Books</h3>
+<%= link_to 'New Book', new_book_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th width="200">Title</th>
+      <th width="200">Authors</th>
+      <th>Price</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to book.title, book_path(book) %></td>
+        <td><%= book.authors_for_display %></td>
+        <td><%= book.price %></td>
+        <td><%= book.release_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

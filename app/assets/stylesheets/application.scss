@@ -12,4 +12,23 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+ *= require jquery-ui
+
  */
+
+body {
+  margin: 10px;
+}
+
+form {
+  width: auto;
+}
+
+.nav-link {
+  float: right;
+}
+
+ul#authors {
+  list-style: url(Delete.png) inside;
+}

@@ -10,6 +10,11 @@ class Book < ApplicationRecord
   validates :authors, length: { minimum: 1, message: 'An author is required' }
 
   MAX_MONTHS_BEFORE_PUB_WITHOUT_PRICE = 2
+  AUTHORS_SEPARATOR = ', '.freeze
+
+  def authors_for_display
+    authors.map(&:name).join(AUTHORS_SEPARATOR)
+  end
 
   private
 

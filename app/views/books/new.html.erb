@@ -1,0 +1,25 @@
+<%= link_to 'All Books', books_path, class: 'nav-link' %>
+<h3>Adding a New Book</h3>
+<%= form_for @book do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <br/>
+  <%= f.label :release_date %>
+  <%= f.text_field :release_date, class: 'date-picker' %>
+  <br/>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <br/>
+  <%= f.label :format %>
+  <%= f.select :format, options_from_collection_for_select(@formats, :id, :name) %>
+  <br/>
+  <%= label_tag :author %>
+  <%= text_field_tag :author, '', id: 'author-search', placeholder: "Enter 3+ consecutive letters in authors's name" %>
+  <br/>
+  <%= label_tag 'Authors:' %>
+  <br/>
+  <ul id="authors">
+  </ul>
+  <%= hidden_field_tag :author_ids, id: 'author_ids' %>
+  <%= f.submit 'Save' %>
+<% end %>
