@@ -13,6 +13,14 @@ class Book < ApplicationRecord
   MAX_MONTHS_BEFORE_PUB_WITHOUT_PRICE = 2
   AUTHORS_SEPARATOR = ', '.freeze
 
+  scope :report, ->(year, format_id) do
+    start_date = Date.new(year, 1, 1)
+    end_date   = start_date.end_of_year
+    where('release_date between ? and ?', start_date, end_date)
+      .where('format_id = ?', format_id)
+      .order('release_date, title')
+  end
+
   before_validation { self.title = title.to_s.strip }
 
   def authors_for_display

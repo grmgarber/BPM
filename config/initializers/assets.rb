@@ -9,7 +9,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Add my baby to the precompiled assets
-Rails.application.config.assets.precompile += %w[book_form.js]
+# Rails.application.config.assets.precompile += %w[book_form.js]
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets

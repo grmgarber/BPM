@@ -1,0 +1,9 @@
+development:
+  year: 2018
+  format_id: 1 # Hardcover
+test:
+  year: 2018
+  format: Hardcover
+production:
+  year: 2018
+  format: Hardcover

@@ -1,4 +1,6 @@
-$(function(){
+// require jquery
+$(function() {
+    if ($("#book-authors").length === 0) { return; }
     const book_authors = JSON.parse($("#book-authors").val());
     function async_update() {
         setTimeout(
@@ -20,9 +22,6 @@ $(function(){
             function (e) { return e.id === author_id }
         );
     }
-
-    // $(".date-picker").datepicker();
-    // $(".date-picker").datepicker("option", "dateFormat", "yy-mm-dd");
 
     book_authors.forEach(function(ba) {
        $("#authors").append("<li id='" + ba.id + "'>" + ba.name + "</li>")

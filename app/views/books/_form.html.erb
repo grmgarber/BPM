@@ -4,7 +4,7 @@
   <%= errors_for @book, :title %>
   <br/>
   <%= f.label :release_date %>
-  <%= f.date_field :release_date, class: 'date-picker' %>
+  <%= f.date_field :release_date %>
   <%= errors_for @book, :release_date %>
   <br/>
   <%= f.label :price %>
@@ -12,7 +12,7 @@
   <%= errors_for @book, :price %>
   <br/>
   <%= f.label :format %>
-  <%= f.select :format, options_from_collection_for_select(@formats, :id, :name) %>
+  <%= f.select :format, options_from_collection_for_select(@formats, :id, :name, @book.format_id) %>
   <br/>
   <%= label_tag :author_search, 'Add Author' %>
   <%= text_field_tag :author_search, '',
@@ -21,12 +21,9 @@
   <br/>
   <%= label_tag 'Authors:' %>
   <%= errors_for @book, :authors %>
-  <br/>
   <ul id="authors">
   </ul>
   <%= hidden_field_tag :author_ids, id: 'author_ids' %>
   <%= f.submit 'Save' %>
 <% end %>
 <%= hidden_field_tag :book_authors, @book_authors.to_json, id: 'book-authors' %>
-
-<%= javascript_include_tag 'book_form' %>

@@ -34,8 +34,11 @@ form {
   }
 }
 
-.nav-link {
-  float: right;
+.nav-links {
+  margin-left: 300px;
+  a {
+    margin: 2px 10px 10px 0;
+  }
 }
 
 ul#authors {

@@ -1,3 +1,7 @@
+<div class="nav-links">
+  <%= link_to 'Edit This Product', edit_book_path(@book) %>
+  <%= link_to 'All Books', books_path %>
+</div>
 <h3>Book Details</h3>
 <table>
   <tbody>
@@ -13,7 +17,7 @@
 
     <tr>
       <td class="attribute-name">Release Date</td>
-      <td><%= @book.release_date %></td>
+      <td><%= format_date(@book.release_date) %></td>
     </tr>
 
     <tr>

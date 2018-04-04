@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action -> { @formats = Format.all }
 
   def index
-    @books = Book.all.order('title')
+    @books = Book.all.order('lower(title)')
   end
 
   def new
@@ -11,27 +11,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    book_params = params[:book]
     book = Book.new
-    book.title = book_params[:title]
-    book.price = book_params[:price]
-    if book_params[:release_date].present?
-      book.release_date = Date.strptime(book_params[:release_date])
-    end
-    book.format = Format.find(book_params[:format])
-    author_ids = params[:author_ids].split(',').map(&:to_i).reject(&:zero?)
-    Book.transaction do
-      author_ids.each do |aid|
-        book.authors << Author.find(aid)
-      end
-      if book.save
-        redirect_to books_path
-      else
-        @book = book
-        @book_authors = book.authors_for_client
-        render 'new'
-        raise ActiveRecord::Rollback
-      end
+    author_ids = assign_params_return_author_ids(book, params)
+    author_ids.each { |aid| book.authors << Author.find(aid) }
+    if book.save
+      redirect_to books_path
+    else
+      @book = book
+      @book_authors = book.authors_for_client
+      render 'new'
     end
   end
 
@@ -41,30 +29,42 @@ class BooksController < ApplicationController
   end
 
   def update
-    book_params = params[:book]
-    book = Book.find(params[:id])
-    book.title = book_params[:title]
-    book.price = book_params[:price]
-    book.release_date = (Date.strptime(book_params[:release_date]) rescue nil)
-    book.format = Format.find(book_params[:format])
-    author_ids = params[:author_ids].split(',').map(&:to_i).reject(&:zero?)
-    Book.transaction do
-      unless author_ids.sort == book.authors.pluck(:id).to_a.sort
-        book.authors = Author.none
-        author_ids.each { |aid| book.authors << Author.find(aid) }
-      end
-      if book.save
-        redirect_to books_path
-      else
-        @book = book
-        @book_authors = book.authors_for_client
-        render 'edit'
-        # raise ActiveRecord::Rollback
-      end
+    @book = Book.find(params[:id])
+    update_authors
+    if @book.save
+      redirect_to books_path
+    else
+      @book_authors = @book.authors_for_client
+      render 'edit'
     end
   end
 
   def show
     @book = Book.find(params[:id])
+  end
+
+  def report
+    @books = Book.report view_context.report_year, view_context.report_format_id
+  end
+
+  private
+
+  def assign_params_return_author_ids(book, params)
+    book_params = params[:book]
+    book.title = book_params[:title]
+    book.price = book_params[:price]
+    if book_params[:release_date].present?
+      book.release_date = Date.strptime(book_params[:release_date])
+    end
+    book.format = Format.find(book_params[:format])
+    params[:author_ids].split(',').map(&:to_i).reject(&:zero?)
+  end
+
+  def update_authors
+    author_ids = assign_params_return_author_ids(@book, params)
+    unless author_ids == @book.authors.pluck(:id).to_a
+      @book.authors = Author.none
+      author_ids.each { |aid| @book.authors << Author.find(aid) }
+    end
   end
 end

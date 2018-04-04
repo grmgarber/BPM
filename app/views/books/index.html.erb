@@ -1,4 +1,8 @@
+<div class="nav-links">
+  <%= link_to 'Show Report', report_books_path %>
+</div>
 <h3>All Books</h3>
+
 <table>
   <thead>
     <tr>
@@ -15,7 +19,7 @@
         <td><%= link_to book.title, book_path(book) %></td>
         <td><%= book.authors_for_display %></td>
         <td><%= book.price %></td>
-        <td><%= book.release_date %></td>
+        <td><%= format_date(book.release_date) %></td>
         <td>
           <%= link_to image_tag('Details.png'), book_path(book), title: 'Product Details' %>
           &nbsp; &nbsp;
