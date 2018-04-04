@@ -23,6 +23,15 @@ body {
 
 form {
   width: auto;
+  input[type="text"] {
+    margin-bottom: 2px;
+  }
+
+  .attribute-error {
+    color: red;
+    font-weight: bold;
+    font-size: 11px;
+  }
 }
 
 .nav-link {

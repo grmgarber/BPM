@@ -1,0 +1,29 @@
+<h3>Book Details</h3>
+<table>
+  <tbody>
+    <tr>
+      <td class="attribute-name">Title</td>
+      <td><%= @book.title %></td>
+    </tr>
+
+    <tr>
+      <td class="attribute-name">Authors</td>
+      <td><%= @book.authors_for_display %></td>
+    </tr>
+
+    <tr>
+      <td class="attribute-name">Release Date</td>
+      <td><%= @book.release_date %></td>
+    </tr>
+
+    <tr>
+      <td class="attribute-name">Price</td>
+      <td><%= @book.price %></td>
+    </tr>
+
+    <tr>
+      <td class="attribute-name">Format</td>
+      <td><%= @book.format_for_display %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,6 +1,4 @@
 <h3>All Books</h3>
-<%= link_to 'New Book', new_book_path %>
-
 <table>
   <thead>
     <tr>
@@ -8,6 +6,7 @@
       <th width="200">Authors</th>
       <th>Price</th>
       <th>Release Date</th>
+      <th><%= link_to 'Add New ', new_book_path %></th>
     </tr>
   </thead>
   <tbody>
@@ -17,6 +16,11 @@
         <td><%= book.authors_for_display %></td>
         <td><%= book.price %></td>
         <td><%= book.release_date %></td>
+        <td>
+          <%= link_to image_tag('Details.png'), book_path(book), title: 'Product Details' %>
+          &nbsp; &nbsp;
+          <%= link_to image_tag('Edit.png'), edit_book_path(book), title: 'Edit Product' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
