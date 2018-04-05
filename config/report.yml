@@ -3,7 +3,7 @@ development:
   format_id: 1 # Hardcover
 test:
   year: 2018
-  format: Hardcover
+  format_id: 1
 production:
   year: 2018
-  format: Hardcover
+  format_id: 1
