@@ -44,3 +44,25 @@ form {
 ul#authors {
   list-style: url(Delete.png) inside;
 }
+
+.short {
+  width: 150px!important;
+}
+
+.flash {
+  font-weight: bold;
+  border: black 1px solid;
+  border-radius: 8px;
+  height: 30px;
+  width: auto;
+  padding: 2px 10px;
+  background-color: #EFEFEF;
+
+  .alert {
+    color: darkred;
+  }
+
+  .notice {
+    color: darkgreen;
+  }
+}

@@ -12,7 +12,12 @@
   </head>
 
   <body>
-
+    <% if flash[:alert] || flash[:notice] %>
+      <div class="flash">
+        <div class="alert"><%= flash[:alert] %></div>
+        <div class="notice"><%= flash[:notice] %></div>
+      </div>
+    <% end %>
     <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>

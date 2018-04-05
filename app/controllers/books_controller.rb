@@ -32,9 +32,11 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     update_authors
     if @book.save
+      flash[:notice] = 'Product successfully updated'
       redirect_to books_path
     else
       @book_authors = @book.authors_for_client
+      flash.now[:alert] = 'Please fix the problems below and re-try'
       render 'edit'
     end
   end
