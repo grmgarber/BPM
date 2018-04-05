@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  FLASH_ERROR = 'Please fix the problems below and re-try'.freeze
+
   before_action -> { @formats = Format.all }
 
   def index
@@ -15,10 +17,12 @@ class BooksController < ApplicationController
     author_ids = assign_params_return_author_ids(book, params)
     author_ids.each { |aid| book.authors << Author.find(aid) }
     if book.save
+      flash[:notice] = 'Product successfully updated'
       redirect_to books_path
     else
       @book = book
       @book_authors = book.authors_for_client
+      flash.now[:alert] = FLASH_ERROR
       render 'new'
     end
   end
@@ -36,7 +40,7 @@ class BooksController < ApplicationController
       redirect_to books_path
     else
       @book_authors = @book.authors_for_client
-      flash.now[:alert] = 'Please fix the problems below and re-try'
+      flash.now[:alert] = FLASH_ERROR
       render 'edit'
     end
   end
