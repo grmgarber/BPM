@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to book.title, book_path(book) %></td>
         <td><%= book.authors_for_display %></td>
-        <td><%= book.price %></td>
+        <td><%= format_price(book.price) %></td>
         <td><%= format_date(book.release_date) %></td>
         <td>
           <%= link_to image_tag('Details.png'), book_path(book), title: 'Product Details' %>

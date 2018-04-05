@@ -10,6 +10,11 @@ module ApplicationHelper
     date.strftime(DATE_FORMAT)
   end
 
+  def format_price(price)
+    return '' if price.blank?
+    '%.2f' % price
+  end
+
   def report_year
     Rails.application.config_for(:report)['year']
   end
